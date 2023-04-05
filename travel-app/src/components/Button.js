@@ -1,13 +1,17 @@
+import {Link} from 'react-router-dom'
+
 const Button = ({color, text, navToPage}) => {
     const style = {
-        backgroundcolor: color
+        backgroundColor: color
     }
   return (
-    <div>
-        <button style={style} onClick={navToPage}>
-            {text}
+    <>
+    <Link to={navToPage}>
+        <button style={style} >
+            {text} 
         </button>
-            </div>
+       </Link>
+            </>
   )
 }
 
