@@ -1,8 +1,11 @@
-import LandingComp from '../components/LandingComp.js'
-
+import SearchBar from "../components/searchBar"
+import PageHeading from "../components/pageHeading"
 const Search = () => {
   return (
-    <LandingComp />
+    <>
+    <PageHeading text={'What is your destination of choice?!'} />
+    <SearchBar />
+    </>
   )
 }
 
