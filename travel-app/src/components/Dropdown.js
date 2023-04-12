@@ -1,4 +1,5 @@
 import '../style/dropdown.css'
+import {useEffect, useState, useRef} from 'react'
 
 const Icon = () => {
     return(
@@ -9,13 +10,49 @@ const Icon = () => {
 }
 
 const Dropdown = ({placeHolder, options}) => {
+    const [showMenu, setShowMenu] = useState(false);
+    const [selectedValue, setSelectedValue] = useState(null)
+    const inputRef = useRef()
+    useEffect(() => {
+        const handler = (e) => {
+            if(inputRef.current && !inputRef.current.contains(e.target)){
+                setShowMenu(false)
+            }
+        }
+    
+
+    window.addEventListener('click', handler)
+    return () => {
+        window.removeEventListener('click',handler)
+    }
+})
+
+    const hadnleInputClick = (e) => {
+        setShowMenu(!showMenu)
+    }
+
     function getDisplay(){
+        if(selectedValue){
+            return selectedValue.label
+        }
         return placeHolder
     }
-        
+    
+    function onItemClick(option){
+        setSelectedValue(option)
+    }
+    
+    function isSelected(option){
+        if(!selectedValue){
+            return false
+        }
+
+        return selectedValue.label === option.value
+    }
+
   return (
     <div className="dropdown-container">
-    <div className="dropdown-input">
+    <div ref={inputRef} onClick = {hadnleInputClick}className="dropdown-input">
     <div className="dropdown-selected-value">{getDisplay()}</div>
         <div className="dropdown-tools">
           <div className="dropdown-tool">
@@ -23,18 +60,19 @@ const Dropdown = ({placeHolder, options}) => {
           </div>
         </div>
       </div>
+      {showMenu && (
       <div className="dropdown-menu">
         {options.map((option) => 
-            (<div key={option.value} className='dropdown-item'>
+            (<div
+            onClick={() => onItemClick(option)}
+            key={option.value} 
+            className={`dropdown-item ${isSelected(option) && 'selected'}`}>
                 {option.label}
                 </div>
         ))}
         </div>
-      <div className="dropdown-tools">
-        <div className="dropdown-tool">
-          <Icon />
-         </div>
-      </div> 
+       
+      )}
     </div>
   )
 }
