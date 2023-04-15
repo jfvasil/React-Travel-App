@@ -4,16 +4,14 @@ const options = [
   {value: 'tropical', label: 'tropical'},
   {value: 'mountains', label: 'mountains'}
 ]
-const otherOptions = [
-  {value: 'test', label: 'test'},
-  {value: 'other test', label: 'other test'},
-  {value: 'last test', label: 'last test'}
-]
+
 const Find = () => {
   return (
-    <div>
-        <Dropdown placeHolder={'Select...'} options={options} />
-        <Dropdown placeHolder={'Select...'} options={otherOptions} />
+    <div className='Find'>
+        <Dropdown placeHolder={'Select...'} options={options} 
+        onChange={(value) =>console.log(value)} />
+        <Dropdown placeHolder={'Select...'} options={options} 
+       onChange={(value) =>console.log(value)} />
     </div>
   )
 }

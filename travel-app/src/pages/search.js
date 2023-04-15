@@ -1,5 +1,5 @@
 import SearchBar from "../components/searchBar"
-import PageHeading from "../components/pageHeading"
+import PageHeading from "../components/PageHeading"
 const Search = () => {
   return (
     <>

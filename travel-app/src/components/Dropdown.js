@@ -9,7 +9,7 @@ const Icon = () => {
     )
 }
 
-const Dropdown = ({placeHolder, options}) => {
+const Dropdown = ({placeHolder, options, onChange}) => {
     const [showMenu, setShowMenu] = useState(false);
     const [selectedValue, setSelectedValue] = useState(null)
     const inputRef = useRef()
@@ -40,6 +40,7 @@ const Dropdown = ({placeHolder, options}) => {
     
     function onItemClick(option){
         setSelectedValue(option)
+        onChange(option)
     }
     
     function isSelected(option){
@@ -73,7 +74,9 @@ const Dropdown = ({placeHolder, options}) => {
         </div>
        
       )}
+      
     </div>
+    
   )
 }
 

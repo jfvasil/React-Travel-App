@@ -1,5 +1,5 @@
 import Button from "./Button";
-import PageHeading from "./pageHeading";
+import PageHeading from "./PageHeading";
 
 const LandingComp = () => {
 

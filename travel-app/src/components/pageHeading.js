@@ -1,4 +1,4 @@
-const pageHeading = ({text}) => {
+const PageHeading = ({text}) => {
   return (
     <>
     <h1>{text}</h1>
@@ -6,4 +6,4 @@ const pageHeading = ({text}) => {
   )
 }
 
-export default pageHeading
+export default PageHeading
