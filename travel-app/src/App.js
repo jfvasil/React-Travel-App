@@ -4,7 +4,7 @@ import Landing from './pages/Landing.js'
 import Search from './pages/Search.js'
 import Find from './pages/Find.js'
 import FindResults from './pages/findResults.js'
-// import TravelInfo from './pages/travelInfo.js'
+import TravelInfo from './pages/TravelInfo.js'
   import './style/App.css'
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
       <Route exact path='/search'  element={<Search />} />
        <Route exact path='/find'  element={<Find />} /> 
       <Route  path='/findResults'  element={<FindResults />} />
-      {/* <Route  path='/travelInfo' element={<TravelInfo />} />  */}
+       <Route  path='/TravelInfo' element={<TravelInfo />} />  
     
 
       </Routes>
