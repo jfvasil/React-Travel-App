@@ -1,27 +1,29 @@
 import {useState, useEffect} from 'react'
 
-const HotelInfo = () => {
+const HotelInfo = ({city}) => {
     const [hotelInfo, setHotelInfo] = useState()
-
+    const url = ''
+    useEffect(() => {
     const fetchHotelInfo = async () => {
-        const res = await fetch('')
-        if(!res){
+        const res = await fetch('tripadvisor.com/api')
+        if(!res.ok){
             throw new Error('Broken Promise :(')
         } else{
-            return res.json
+            const data = await res.json()
+            setHotelInfo(data.id)
         }
     }
-    
-    useEffect(() => {
-       fetchHotelInfo()
-       .then(res => {
-        setHotelInfo(res)
-       })
-       .catch(e => { 
-        console.log(e.message)
-       })
-    })
-    
-}
+    fetchHotelInfo()
+}, [city])
 
+    return(
+        <div>
+        <a href={url}>
+            <img src=''></img>
+            </a>
+        </div>
+    )
+
+
+}
 export default HotelInfo
