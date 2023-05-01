@@ -8,7 +8,6 @@ const options = {
     'x-api-key': process.env.REACT_APP_API_KEY}
 }
     const listUrl = 'https://syndication.api.eb.com/production/articles?articleTypeId=45&categoryId=7'
-    const url = 'https://syndication.api.eb.com/production/article/354413/xml'
     const [destInfo, setDestInfo] = useState()
     const [disTrial, setDisTrial] = useState()
     const fetchListData = async () => {
@@ -16,18 +15,36 @@ const options = {
         if(!res){
             throw new Error('Broken Promise')
         } else{
-            return res.json()
+            const data = res.json()
+            console.log(data.articles)
+            return data
+             
         }
     }
-    const fetchData = async () => {
-        const res = await fetch(url, options)
-        if(!res){
-            throw new Error('Broken Promise')
-        } else{
-            return res.text()
-        }
-    }
+    
+   
+
+    
+    
     useEffect(() => {
+        const findArticleId = (data, location) => {
+            let filteredData = data.filter(el => el.title === location)
+            return filteredData.articleId
+        }
+        fetchListData()
+        .then((res) => {
+            console.log(res)
+            setDisTrial(findArticleId(res, 'new york city'))
+        })
+        const url = `https://syndication.api.eb.com/production/article/${disTrial}/xml`
+        const fetchData = async () => {
+            const res = await fetch(url, options)
+            if(!res){
+                throw new Error('Broken Promise')
+            } else{
+                return res.text()
+            }
+        }
         fetchData()
         .then((res) => {
             const xmlText = res
@@ -37,13 +54,9 @@ const options = {
         .catch((e) => {
             console.log(e.message)
         })
-       fetchListData()
-       .then((res) => {
-        setDisTrial(res.articles[0].title)
-       })
+       
     })
 
-   
     
 const XMLParser = (xml) => {
     const parser = new DOMParser()
@@ -75,7 +88,9 @@ const XMLParser = (xml) => {
              <h1>{disTrial}</h1> 
       </div>
       )
-    }
+        
+        }
+    
     
     
 
